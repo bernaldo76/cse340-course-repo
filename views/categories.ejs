@@ -1,0 +1,17 @@
+<%- include('partials/header') %>
+
+<section class="content-container">
+    <h2><%= title %></h2>
+    <p>Explore our dynamic volunteer opportunities by selecting a category below:</p>
+    
+    <ul class="categories-list">
+        <% categories.forEach(category => { %>
+            <li class="category-card">
+                <h3><%= category %></h3>
+                <p>Find meaningful ways to contribute to the <%= category.toLowerCase() %> sector.</p>
+            </li>
+        <% }) %>
+    </ul>
+</section>
+
+<%- include('partials/footer') %>

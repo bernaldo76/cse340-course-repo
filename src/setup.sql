@@ -1,3 +1,22 @@
+
+CREATE TABLE IF NOT EXISTS public.organization (
+    organization_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+
+INSERT INTO public.organization (organization_id, name)
+VALUES
+(1, 'BrightFuture Builders'),
+(2, 'GreenHarvest Growers'),
+(3, 'UnityServe Volunteers')
+ON CONFLICT (organization_id)
+DO UPDATE SET name = EXCLUDED.name;
+
+SELECT setval(
+    pg_get_serial_sequence('public.organization', 'organization_id'),
+    (SELECT MAX(organization_id) FROM public.organization)
+);
+
 CREATE TABLE IF NOT EXISTS public.service_project (
     project_id SERIAL PRIMARY KEY,
     organization_id INTEGER NOT NULL REFERENCES public.organization(organization_id),
@@ -23,4 +42,50 @@ VALUES
 (3, 'Community Kitchen', 'Prepare meals for vulnerable community members.', 'Lima, Peru', '2026-11-22'),
 (3, 'Elderly Care Program', 'Provide support and companionship to elderly people.', 'Arequipa, Peru', '2026-11-27'),
 (3, 'Clothing Donation Drive', 'Collect and distribute clothing to families.', 'Quillabamba, Peru', '2026-12-03'),
-(3, 'Community Support Project', 'Organize volunteers to assist local families.', 'Puno, Peru', '2026-12-07');
+(3, 'Community Support Project', 'Organize volunteers to assist local families.', 'Puno, Peru', '2026-12-07')
+ON CONFLICT DO NOTHING;
+
+CREATE TABLE IF NOT EXISTS public.category (
+    category_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE
+);
+
+INSERT INTO public.category (name)
+VALUES
+('Environmental'),
+('Educational'),
+('Community Service'),
+('Health and Wellness')
+ON CONFLICT (name) DO NOTHING;
+
+CREATE TABLE IF NOT EXISTS public.project_category (
+    project_id INTEGER NOT NULL REFERENCES public.service_project(project_id),
+    category_id INTEGER NOT NULL REFERENCES public.category(category_id),
+    PRIMARY KEY (project_id, category_id)
+);
+
+INSERT INTO public.project_category (project_id, category_id)
+SELECT p.project_id, c.category_id
+FROM (
+    VALUES
+    ('Community Health Campaign', 'Health and Wellness'),
+    ('Blood Donation Drive', 'Health and Wellness'),
+    ('First Aid Training', 'Health and Wellness'),
+    ('Emergency Preparedness', 'Health and Wellness'),
+    ('Medical Supplies Collection', 'Health and Wellness'),
+    ('School Supply Drive', 'Educational'),
+    ('Children Literacy Program', 'Educational'),
+    ('Clean Water Initiative', 'Environmental'),
+    ('Youth Education Workshop', 'Educational'),
+    ('Children Nutrition Program', 'Health and Wellness'),
+    ('Food Distribution', 'Community Service'),
+    ('Community Kitchen', 'Community Service'),
+    ('Elderly Care Program', 'Community Service'),
+    ('Clothing Donation Drive', 'Community Service'),
+    ('Community Support Project', 'Community Service')
+) AS assignments(project_title, category_name)
+JOIN public.service_project p
+    ON p.title = assignments.project_title
+JOIN public.category c
+    ON c.name = assignments.category_name
+ON CONFLICT (project_id, category_id) DO NOTHING;

@@ -1,3 +1,4 @@
+
 <%- include('partials/header') %>
 
 <main class="content-container">
@@ -5,21 +6,25 @@
     <p>Here are a few of our partner organizations:</p>
 
     <div class="organizations-list" style="display: flex; flex-direction: column; gap: 20px; margin-top: 20px;">
-        
-        <div class="org-item" style="display: flex; align-items: center; gap: 15px;">
-            <img src="/images/brightfuture-logo.png" alt="BrightFuture Builders" style="width: 80px; height: auto;">
-            <p><strong>BrightFuture Builders:</strong> info@brightfuture.org</p>
-        </div>
 
-        <div class="org-item" style="display: flex; align-items: center; gap: 15px;">
-            <img src="/images/greenharvest-logo.png" alt="GreenHarvest Growers" style="width: 80px; height: auto;">
-            <p><strong>GreenHarvest Growers:</strong> contact@greenharvest.org</p>
-        </div>
-
-        <div class="org-item" style="display: flex; align-items: center; gap: 15px;">
-            <img src="/images/unityserve-logo.png" alt="UnityServe Volunteers" style="width: 80px; height: auto;">
-            <p><strong>UnityServe Volunteers:</strong> hello@unityserve.org</p>
-        </div>
+        <% organizations.forEach(organization => { %>
+            <% if (organization.organization_id === 1) { %>
+                <div class="org-item" style="display: flex; align-items: center; gap: 15px;">
+                    <img src="/images/brightfuture-logo.png" alt="<%= organization.name %>" style="width: 80px; height: auto;">
+                    <p><strong><%= organization.name %>:</strong> info@brightfuture.org</p>
+                </div>
+            <% } else if (organization.organization_id === 2) { %>
+                <div class="org-item" style="display: flex; align-items: center; gap: 15px;">
+                    <img src="/images/greenharvest-logo.png" alt="<%= organization.name %>" style="width: 80px; height: auto;">
+                    <p><strong><%= organization.name %>:</strong> contact@greenharvest.org</p>
+                </div>
+            <% } else if (organization.organization_id === 3) { %>
+                <div class="org-item" style="display: flex; align-items: center; gap: 15px;">
+                    <img src="/images/unityserve-logo.png" alt="<%= organization.name %>" style="width: 80px; height: auto;">
+                    <p><strong><%= organization.name %>:</strong> hello@unityserve.org</p>
+                </div>
+            <% } %>
+        <% }) %>
 
     </div>
 </main>

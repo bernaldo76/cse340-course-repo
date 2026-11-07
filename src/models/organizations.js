@@ -1,13 +1,15 @@
 
-import pool from './db.js';
+import db from './db.js';
 
-export async function getAllOrganizations() {
-    const sql = `
-        SELECT *
-        FROM public.organization
-        ORDER BY organization_id;
+const getAllOrganizations = async () => {
+    const query = `
+        SELECT organization_id, name, description, contact_email, logo_filename
+        FROM public.organization;
     `;
 
-    const result = await pool.query(sql);
+    const result = await db.query(query);
+
     return result.rows;
-}
+};
+
+export { getAllOrganizations };

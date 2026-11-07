@@ -8,23 +8,14 @@
     <div class="organizations-list" style="display: flex; flex-direction: column; gap: 20px; margin-top: 20px;">
 
         <% organizations.forEach(organization => { %>
-            <% if (organization.organization_id === 1) { %>
-                <div class="org-item" style="display: flex; align-items: center; gap: 15px;">
-                    <img src="/images/brightfuture-logo.png" alt="<%= organization.name %>" style="width: 80px; height: auto;">
-                    <p><strong><%= organization.name %>:</strong> info@brightfuture.org</p>
+            <div class="org-item" style="display: flex; align-items: center; gap: 15px;">
+                <img src="/images/<%= organization.logo_filename %>" alt="<%= organization.name %> logo" style="width: 80px; height: auto;">
+                <div>
+                    <p><strong><%= organization.name %>:</strong> <%= organization.contact_email %></p>
+                    <p><%= organization.description %></p>
                 </div>
-            <% } else if (organization.organization_id === 2) { %>
-                <div class="org-item" style="display: flex; align-items: center; gap: 15px;">
-                    <img src="/images/greenharvest-logo.png" alt="<%= organization.name %>" style="width: 80px; height: auto;">
-                    <p><strong><%= organization.name %>:</strong> contact@greenharvest.org</p>
-                </div>
-            <% } else if (organization.organization_id === 3) { %>
-                <div class="org-item" style="display: flex; align-items: center; gap: 15px;">
-                    <img src="/images/unityserve-logo.png" alt="<%= organization.name %>" style="width: 80px; height: auto;">
-                    <p><strong><%= organization.name %>:</strong> hello@unityserve.org</p>
-                </div>
-            <% } %>
-        <% }) %>
+            </div>
+        <% }); %>
 
     </div>
 </main>

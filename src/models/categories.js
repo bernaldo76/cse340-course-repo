@@ -1,7 +1,7 @@
 
 import pool from './db.js';
 
-export async function getAllCategories() {
+export const getAllCategories = async () => {
     const sql = `
         SELECT name
         FROM public.category
@@ -10,4 +10,4 @@ export async function getAllCategories() {
 
     const result = await pool.query(sql);
     return result.rows.map(category => category.name);
-}
+};

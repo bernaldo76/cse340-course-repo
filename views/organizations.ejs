@@ -11,7 +11,7 @@
             <div class="org-item" style="display: flex; align-items: center; gap: 15px;">
                 <img src="/images/<%= organization.logo_filename %>" alt="<%= organization.name %> logo" style="width: 80px; height: auto;">
                 <div>
-                    <p><strong><%= organization.name %>:</strong> <%= organization.contact_email %></p>
+                    <p><strong><a href="/organization/<%= organization.organization_id %>"><%= organization.name %></a>:</strong> <%= organization.contact_email %></p>
                     <p><%= organization.description %></p>
                 </div>
             </div>

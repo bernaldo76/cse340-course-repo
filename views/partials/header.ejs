@@ -20,4 +20,10 @@
             </ul>
         </nav>
     </header>
+    <% const messages = flash(); %>
+<% Object.keys(messages).forEach(type => { %>
+    <% messages[type].forEach(msg => { %>
+        <div class="alert <%= type %>"><%= msg %></div>
+    <% }); %>
+<% }); %>
     <main>

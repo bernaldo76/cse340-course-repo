@@ -36,3 +36,25 @@ export const getCategoriesByProjectId = async (id) => {
     const result = await pool.query(sql, [id]);
     return result.rows;
 };
+
+const assignCategoryToProject = async (projectId, categoryId) => {
+    const query = `
+        INSERT INTO public.project_category (category_id, project_id)
+        VALUES ($1, $2);
+    `;
+
+    await pool.query(query, [categoryId, projectId]);
+};
+
+export const updateCategoryAssignments = async (projectId, categoryIds) => {
+    const deleteQuery = `
+        DELETE FROM public.project_category
+        WHERE project_id = $1;
+    `;
+
+    await pool.query(deleteQuery, [projectId]);
+
+    for (const categoryId of categoryIds) {
+        await assignCategoryToProject(projectId, categoryId);
+    }
+};

@@ -1,6 +1,8 @@
 import { getAllOrganizations, getOrganizationDetails, createOrganization, updateOrganization } from '../models/organizations.js';
 import { getProjectsByOrganizationId } from '../models/projects.js';
 import { body, validationResult } from 'express-validator';
+
+
 const organizationValidation = [
     body('name')
         .trim()

@@ -10,6 +10,9 @@
         type="text"
         id="name"
         name="name"
+        minlength="3"
+        maxlength="150"
+        required
         value="<%= organizationDetails.name %>"
       />
     </div>
@@ -19,15 +22,18 @@
       <textarea
         id="description"
         name="description"
+        maxlength="500"
+        required
       ><%= organizationDetails.description %></textarea>
     </div>
 
     <div class="form-group">
       <label for="contactEmail">Contact Email</label>
       <input
-        type="text"
+        type="email"
         id="contactEmail"
         name="contactEmail"
+        required
         value="<%= organizationDetails.contact_email %>"
       />
     </div>

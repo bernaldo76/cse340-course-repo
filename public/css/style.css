@@ -178,3 +178,11 @@ form button {
 .form-group select {
     width: 100%;
 }
+.form-group input[type="checkbox"] {
+    width: auto;
+}
+
+.form-group input[type="checkbox"] + label {
+    display: inline-block;
+    margin-left: 0.5rem;
+}

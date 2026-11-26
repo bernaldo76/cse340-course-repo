@@ -2,7 +2,9 @@
 
 <section class="content-container">
     <h2><%= title %></h2>
+    <% if (user && user.role_name === 'admin') { %>
     <a href="/new-category">Add New Category</a>
+<% } %>
     <p>Explore our dynamic volunteer opportunities by selecting a category below:</p>
 
     <ul class="categories-list">

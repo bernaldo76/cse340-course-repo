@@ -1,7 +1,9 @@
 <%- include('partials/header') %>
 <main>
     <h1><%= category.name %></h1>
-<a href="/edit-category/<%= category.category_id %>">Edit Category</a>
+<% if (user && user.role_name === 'admin') { %>
+    <a href="/edit-category/<%= category.category_id %>">Edit Category</a>
+<% } %>
     <ul>
         <% projects.forEach(project => { %>
             <li>

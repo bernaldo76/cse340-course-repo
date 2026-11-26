@@ -38,6 +38,7 @@ app.use(session({
 app.use(flash);
 app.use((req, res, next) => {
     res.locals.isLoggedIn = !!req.session.user;
+    res.locals.user = req.session.user || null;
     next();
 });
 app.use(express.urlencoded({ extended: true }));

@@ -186,3 +186,24 @@ form button {
     display: inline-block;
     margin-left: 0.5rem;
 }
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.users-table th,
+.users-table td {
+    padding: 0.8rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #cbd5e0;
+}
+
+.users-table th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.users-table tbody tr:nth-child(even) {
+    background-color: var(--bg-color);
+}
